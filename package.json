@@ -1,0 +1,26 @@
+{
+  "name": "DumpXee",
+  "version": "0.0.1",
+  "description": "Fetch all the data of your Xee account.",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "1.14.2",
+    "express": "4.13.3",
+    "morgan": "1.6.1",
+    "printit": "0.1.19",
+    "request-json": "0.5.5"
+  },
+  "devDependencies": {
+    "nodemon": "1.8.1"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node_modules/.bin/nodemon server.js --ignore client/",
+    "test": "mocha tests/unit/*/* --reporter spec --colors"
+  },
+  "author": "jacquarg",
+  "license": "MIT",
+  "cozy-permissions": {
+  },
+  "cozy-displayName": "DumpXee"
+}

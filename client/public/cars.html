@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Dump Xee - Véhicule</title>
+
+        <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    </head>
+    <body>
+        <h1>Votre véhicule</h1>
+        <button class="btn btn-default" id='event'>Données techniques</button>
+        <button class="btn btn-default" id='carstatus' disabled>Statut</button>
+        <button class="btn btn-default" id='location'>Données GPS</button>
+        <button class="btn btn-default" id='accelerometer'>Accéleromètre</button>
+        <br>
+        <label>
+            Nombre maximum de lignes : 
+            <input id="rowCount" type="number" value="200">
+
+        <script src="scripts/index.js"></script>
+        <script>
+            var carId = /.*id=(.*)/.exec(window.location.href)[1];
+
+            var exportCSVFile = function(jsonArray) {
+                var csv = toCSV(jsonArray);
+
+                var file = new Blob([csv], {type: 'application/csv'});
+                window.open(URL.createObjectURL(file));
+            };
+            $('button').click(function(ev) {
+                var command = ev.target.id;
+                API.getData(carId, command, $('#rowCount').val())
+                .then(exportCSVFile);
+            });
+
+        </script>
+
+    </body>
+</html>
